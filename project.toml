@@ -1,0 +1,6 @@
+[project]
+name = "deconv"
+version = "0.0.1"
+description = "Mass spectrum deconvolution toolkit"
+requires-python = ">=3.9"
+dependencies = ["numpy", "matplotlib", "pandas"]
