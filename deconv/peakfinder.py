@@ -1,6 +1,7 @@
 # peakfinder.py
 from dataclasses import dataclass
 import numpy as np
+import csv
 
 @dataclass
 class Peak:
@@ -45,3 +46,11 @@ def find_peaks(mz, inten, min_snr=3.0, smooth_sigma=2.0):
             snr = y[i] / (noise+1e-12)
             peaks.append(Peak(mz[i], y[i], width, snr))
     return peaks
+    
+def save_peaks_csv(peaks, path: str):
+    """Save list of Peak objects to CSV file."""
+    with open(path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["mz", "intensity", "width", "snr"])
+        for p in peaks:
+            writer.writerow([f"{p.mz:.6f}", f"{p.intensity:.2f}", f"{p.width:.6f}", f"{p.snr:.2f}"])
